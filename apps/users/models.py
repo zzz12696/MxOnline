@@ -29,6 +29,9 @@ class EmailVerifyRecord(models.Model):
     class Meta:
         verbose_name = '邮箱验证码'
         verbose_name_plural = verbose_name
+        
+    def __str__(self):
+        return '{email}\t({code})'.format(email=self.email, code=self.code)
 
 
 class Banner(models.Model):
