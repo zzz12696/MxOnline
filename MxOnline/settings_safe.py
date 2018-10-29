@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'operation',
     'xadmin',
     'crispy_forms',
+    'captcha',
 ]
 
 AUTH_USER_MODEL = 'users.UserProfile'
@@ -94,7 +95,7 @@ DATABASES = {
         'PORT': '3306',
         'NAME': 'mxonline',
         'USER': 'zzz',
-        'PASSWORD': 'zzz970318',
+        'PASSWORD': '****',
     }
 }
 
@@ -145,3 +146,12 @@ STATICFILES_DIRS = (
 AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
 )
+
+# 实现自动发送激活码邮件功能
+# TODO: 163邮箱可以，QQ邮箱就不行，需要测试QQ邮箱SMTP服务器
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '***@163.com'
+EMAIL_HOST_PASSWORD = '***'
+EMAIL_USER_TLS = False
+EMAIL_FROM = '***@163.com'
