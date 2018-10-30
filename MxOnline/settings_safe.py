@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '48j6$(^0yh-7qx0pw+*_l6qfgv=#^!+f5$_c&000)ieap33fi$'
+SECRET_KEY = '48j6$(^0yh-7qx0pw+*_l6qfgv=#^!+f5$_c&000)****'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'captcha',
+    'pure_pagination',
 ]
 
 AUTH_USER_MODEL = 'users.UserProfile'
@@ -77,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',  # 添加此上下文处理器
             ],
         },
     },
@@ -93,8 +95,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'NAME': 'mxonline',
-        'USER': 'zzz',
+        'NAME': '****',
+        'USER': '****',
         'PASSWORD': '****',
     }
 }
@@ -151,7 +153,12 @@ AUTHENTICATION_BACKENDS = (
 # TODO: 163邮箱可以，QQ邮箱就不行，需要测试QQ邮箱SMTP服务器
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = '***@163.com'
-EMAIL_HOST_PASSWORD = '***'
+EMAIL_HOST_USER = '****@163.com'
+EMAIL_HOST_PASSWORD = '****'
 EMAIL_USER_TLS = False
-EMAIL_FROM = '***@163.com'
+EMAIL_FROM = '****@163.com'
+
+
+# 上传文件路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
