@@ -2,9 +2,12 @@ from datetime import datetime
 
 from django.db import models
 
+from organization.models import CourseOrg
+
 
 class Course(models.Model):
     name = models.CharField(verbose_name='课程名', max_length=50)
+    course_org = models.ForeignKey(CourseOrg, verbose_name='课程所属机构', null=True)
     desc = models.CharField(verbose_name='课程描述', max_length=300)
     detail = models.TextField(verbose_name='课程详情')
     degree = models.CharField(verbose_name='课程难度', max_length=2, choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')))

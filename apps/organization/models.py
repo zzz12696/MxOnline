@@ -44,6 +44,7 @@ class Teacher(models.Model):
     work_company = models.CharField(verbose_name='就职公司', max_length=50)
     work_position = models.CharField(verbose_name='公司职位', max_length=50)
     points = models.CharField(verbose_name='教学特点', max_length=50)
+    image = models.ImageField(verbose_name='头像', upload_to='teacher/%Y/%m', max_length=100, default='')
     click_nums = models.IntegerField(verbose_name='点击数', default=0)
     fav_nums = models.IntegerField(verbose_name='收藏数', default=0)
     add_time = models.DateTimeField(verbose_name='添加时间', default=datetime.now)
@@ -51,3 +52,6 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = '教师'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name

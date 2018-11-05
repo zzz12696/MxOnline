@@ -9,7 +9,7 @@
     <section>
         <div class="wp">
             <ul class="crumbs">
-                <li><a href="index.html">首页</a>></li>
+                <li><a href="{% url 'index' %}">首页</a>></li>
                 <li>课程机构</li>
             </ul>
         </div>
@@ -59,7 +59,7 @@
                         {% for org in all_orgs.object_list %}
                             <dl class="des difdes">
                                 <dt>
-                                    <a href="org-detail-homepage.html">
+                                    <a href="{% url 'org:org_home' org.id %}">
                                         <img width="200" height="120" class="scrollLoading"
                                              data-url="{{ MEDIA_URL }}{{ org.image }}"/>
                                     </a>
@@ -139,7 +139,8 @@
                         <input type="text" name="course_name" id="companyAddress" placeholder="课程名" maxlength="50"/>
                     </div>
                     <p class="error company-tips" id="jsCompanyTips"></p>
-                    <input class="btn" type="text" id="jsStayBtn" value="立即咨询 >"/>
+                    <input class="btn" type="button" id="jsStayBtn" value="立即咨询 >"/>
+                    {% csrf_token %}
                 </form>
             </div>
 
@@ -158,3 +159,30 @@
         </div>
     </section>
 {% endblock content %}
+
+{% block custom_js %}
+<script>
+    $(function () {
+        $(document).ready(function() {
+            $('#jsStayBtn').on('click', function () {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'org:add_ask' %}",
+                    data: $('#jsStayForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            $('#jsStayForm')[0].reset();  //重置表单
+                            $('#jsCompanyTips').hide();  //隐藏原先的出错信息
+                            alert("提交成功")
+                        } else if (data.status == 'fail') {
+                            $('#jsCompanyTips').html(data.msg)
+                        }
+                    },
+                });
+            });
+        });
+    })
+</script>
+{% endblock custom_js %}
