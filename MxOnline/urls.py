@@ -39,6 +39,9 @@ urlpatterns = [
     # 课程机构url配置
     url(r'^org/', include('organization.urls', namespace='org')),
 
+    # 课程相关url配置
+    url(r'^course/', include('courses.urls', namespace='course')),
+
     # 验证码
     url(r'^captcha/', include('captcha.urls')),
 

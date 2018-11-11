@@ -7,7 +7,6 @@ from django.http import HttpResponse
 
 from .models import CourseOrg, CityDict
 from .forms import UserAskForm
-from courses.models import Course
 from operation.models import UserFavorite
 
 
@@ -53,7 +52,7 @@ class OrgView(View):
 
         orgs = p.page(page)
 
-        return render(request, 'org-list.html', {
+        return render(request, 'organization/org-list.html', {
             'all_orgs': orgs,
             'all_cities': all_cities,
             'org_nums': org_nums,
@@ -94,7 +93,7 @@ class OrgHomeView(View):
 
         all_courses = course_org.course_set.all()  # django ORM反向取值
         all_teachers = course_org.teacher_set.all()
-        return render(request, 'org-detail-homepage.html', {
+        return render(request, 'organization/org-detail-homepage.html', {
             'all_courses': all_courses,
             'all_teachers': all_teachers,
             'course_org': course_org,
@@ -117,7 +116,7 @@ class OrgCourseView(View):
                 has_fav = True
 
         all_courses = course_org.course_set.all()  # django ORM反向取值
-        return render(request, 'org-detail-course.html', {
+        return render(request, 'organization/org-detail-course.html', {
             'all_courses': all_courses,
             'course_org': course_org,
             'current_page': current_page,
@@ -138,7 +137,7 @@ class OrgDescView(View):
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
 
-        return render(request, 'org-detail-desc.html', {
+        return render(request, 'organization/org-detail-desc.html', {
             'course_org': course_org,
             'current_page': current_page,
             'has_fav': has_fav,
@@ -159,7 +158,7 @@ class OrgTeacherView(View):
                 has_fav = True
 
         all_teachers = course_org.teacher_set.all()
-        return render(request, 'org-detail-teachers.html', {
+        return render(request, 'organization/org-detail-teachers.html', {
             'course_org': course_org,
             'all_teachers': all_teachers,
             'current_page': current_page,
