@@ -42,6 +42,9 @@ urlpatterns = [
     # 课程相关url配置
     url(r'^course/', include('courses.urls', namespace='course')),
 
+    # 个人中心相关url配置
+    url(r'^user/', include('users.urls', namespace='user')),
+
     # 验证码
     url(r'^captcha/', include('captcha.urls')),
 

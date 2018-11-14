@@ -16,27 +16,6 @@
     </section>
 {% endblock custom_bread %}
 
-{% block title_box %}
-    <nav>
-        <div class="nav">
-            <div class="wp">
-                <ul>
-                    <li><a href="{% url 'index' %}">首页</a></li>
-                    <li class="active">
-                        <a href="{% url 'course:course_list' %}">
-                            公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'org:teacher_list' %}">授课教师</a>
-                    </li>
-                    <li><a href="{% url 'org:org_list' %}">授课机构</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock title_box %}
-
 {% block content %}
     <section>
 	<div class="wp">
@@ -51,31 +30,30 @@
 				</div>
                 <div id="inWindow">
                     <div class="tab_cont " id="content">
-					<div class="group_list">
-
-                        {% for course in all_courses.object_list %}
-                            <div class="box">
-                                <a href="{% url 'course:course_detail' course.id %}">
-                                    <img width="280" height="350" class="scrollLoading" src="{{ MEDIA_URL }}{{ course.image }}"/>
-                                </a>
-                                <div class="des">
+                        <div class="group_list">
+                            {% for course in all_courses.object_list %}
+                                <div class="box">
                                     <a href="{% url 'course:course_detail' course.id %}">
-                                        <h2>{{ course.name }}</h2>
+                                        <img width="280" height="350" class="scrollLoading" src="{{ MEDIA_URL }}{{ course.image }}"/>
                                     </a>
-                                    <span class="fl">时长：<i class="key">{{ course.learn_times }}</i></span>
-                                    <span class="fr">学习人数：{{ course.students }}&nbsp;&nbsp;</span>
+                                    <div class="des">
+                                        <a href="{% url 'course:course_detail' course.id %}">
+                                            <h2>{{ course.name }}</h2>
+                                        </a>
+                                        <span class="fl">时长：<i class="key">{{ course.learn_times }}</i></span>
+                                        <span class="fr">学习人数：{{ course.students }}&nbsp;&nbsp;</span>
+                                    </div>
+                                    <div class="bottom">
+                                        <a href="{% url 'course:course_detail' course.id %}"><span class="fl">来自{{ course.course_org.name }}</span></a>
+                                        <span class="star fr  notlogin
+                                            " data-favid="15">
+                                            {{ course.fav_nums }}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="bottom">
-                                    <a href="{% url 'course:course_detail' course.id %}"><span class="fl">来自{{ course.course_org.name }}</span></a>
-                                    <span class="star fr  notlogin
-                                        " data-favid="15">
-                                        {{ course.fav_nums }}
-                                    </span>
-                                </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
 
-					</div>
 
                     <!--分页-->
                     <div class="pageturn">
@@ -86,7 +64,7 @@
 
                             {% for page in all_courses.pages %}
                                 {% if page %}
-                                    {% ifequal page all_orgs.number %}
+                                    {% ifequal page all_courses.number %}
                                         <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
                                     {% else %}
                                         <li><a href="?{{ page.querystring }}">{{ page }}</a></li>
@@ -101,13 +79,12 @@
                         </ul>
                     </div>
 
-				</div>
+				    </div>
                 </div>
-			</div>
+            </div>
 			<div class="right layout">
 				<div class="head">热门课程推荐</div>
 				<div class="group_recommend">
-
                     {% for course in hot_courses %}
                     <dl>
 						<dt>
@@ -121,7 +98,6 @@
 						</dd>
 					</dl>
                     {% endfor %}
-
 				</div>
 			</div>
 		</div>
