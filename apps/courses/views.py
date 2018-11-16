@@ -95,6 +95,8 @@ class CourseInfoView(LoginRequiredMixin, View):
     '''
     def get(self, request, course_id):
         course = Course.objects.get(id=int(course_id))
+
+        # 增加学习该课程的学生人数
         course.students += 1
         course.save()
 

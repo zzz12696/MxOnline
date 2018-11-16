@@ -43,7 +43,7 @@
                                 </dl>
                                 <div class="btn">
                                     <a class="personcenter fl" href="{% url 'user:user_info' %}">进入个人中心</a>
-                                    <a class="fr" href="/logout/">退出</a>
+                                    <a class="fr" href="{% url 'logout' %}">退出</a>
                                 </div>
                             </div>
                         </div>
@@ -54,6 +54,9 @@
                 </div>
 
                 {% block custom_top %}
+                    <a href="{% url 'user:mymessage' %}">
+                        <div class="msg-num"><span id="MsgNum">{{ request.user.get_unread_nums }}</span></div>
+                    </a>
                 {% endblock custom_top %}
             </div>
 

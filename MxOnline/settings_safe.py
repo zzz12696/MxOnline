@@ -25,12 +25,12 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '48j6$(^0yh-7qx0pw+*_l6qfgv=#^!+f5$_c&000)****'
+SECRET_KEY = '48j6$(^0yh-7qx0pw+*_l6qfgv=#^!+f5$_c&000)********'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -95,9 +95,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-        'NAME': '****',
-        'USER': '****',
-        'PASSWORD': '****',
+        'NAME': '********',
+        'USER': '********',
+        'PASSWORD': '********',
     }
 }
 
@@ -153,12 +153,14 @@ AUTHENTICATION_BACKENDS = (
 # TODO: 163邮箱可以，QQ邮箱就不行，需要测试QQ邮箱SMTP服务器
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = '****@163.com'
-EMAIL_HOST_PASSWORD = '****'
+EMAIL_HOST_USER = '********@163.com'
+EMAIL_HOST_PASSWORD = '********'
 EMAIL_USER_TLS = False
-EMAIL_FROM = '****@163.com'
+EMAIL_FROM = '********@163.com'
 
 
 # 上传文件路径
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
